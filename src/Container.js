@@ -5,7 +5,7 @@ export default class Container extends PureComponent {
     static defaultProps = {
         depth: 0,
         iterations: 5,
-        maxDepth: 3
+        maxDepth: 4
     }
     renderTile(i) {
         return (
@@ -13,18 +13,12 @@ export default class Container extends PureComponent {
         )
     }
     render() {
-        console.log(`depth: ${this.props.depth}`);
         if (this.props.depth >= this.props.maxDepth) {
             return null;
         }
-        const tiles = [];
-        for (let i = 0; i < this.props.iterations; i++) {
-            tiles.push(this.renderTile(i));
-        }
-        console.log(`tiles`, tiles);
         return (
             <div className="Container">
-                {tiles}
+                {(new Array(this.props.iterations)).fill().map((v,i) => this.renderTile(i))}
             </div>
         )
     }

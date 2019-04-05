@@ -6,21 +6,19 @@ function getRandomInt(max) {
 }
 
 export default class Tile extends PureComponent {
-    renderTile(i) {
+    renderContainer(i) {
         return (
-            <div className={["Tile", `Tile-${getRandomInt(3)}`].join(' ')}>
+            <div className={["Tile", `Tile-${getRandomInt(10)}`].join(' ')} key={i}>
                 <Container depth={this.props.depth + 1} />
             </div>
         )
     }
     render() {
-        const max = getRandomInt(5);
-        console.log(`tile-depth: ${this.props.depth} (max: ${max})`);
-        const tiles = [];
-        for (let i = 0; i <= max; i++) {
-            tiles.push(this.renderTile(i));
-        }
-        console.log(tiles);
-        return <div>{tiles}</div>;
+        const size = getRandomInt(5);
+        return (
+            <div>
+                {(new Array(size)).fill().map((v,i) => this.renderContainer(i))}
+            </div>
+        );
     }
 }
